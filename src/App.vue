@@ -67,8 +67,8 @@ export default {
 </script>
 <style>
 body {
-  @apply bg-gray-100;
-  @apply text-gray-700;
+background-color: #f7fafc;
+color: #4a5568;
 }
 .custom-right-sidebar{
   height: calc(100vh - 40px);

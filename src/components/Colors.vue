@@ -1,6 +1,10 @@
 <template>
   <div>
+    <p class="text-xs text-center text-gray-600 mb-5">
+      Click on the color to copy Hexcode
+    </p>
     <div v-if="getTopColors.length < 1" class="palette-container">
+
       <div class="color-palette bg-gray-600 shadow-lg" :class="{ 'animate' : getExtractionStatus}" />
       <div class="color-palette bg-gray-400 shadow-lg" :class="{ 'animate' : getExtractionStatus}" />
       <div class="color-palette bg-gray-500 shadow-lg" :class="{ 'animate' : getExtractionStatus}" />

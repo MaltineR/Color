@@ -1,11 +1,6 @@
 import { kmeans } from 'clusterfck';
 import createWebWorker from '@/modules/CreateWebWorker';
-/**
- * const colors = [
- *  [20, 20, 80],
- *  [22, 22, 90],
- * ]
- */
+
 const createArray = createWebWorker((imageArray) => {
   const colors = [];
   for (let i = 0; i < imageArray.data.length; i += 4) {

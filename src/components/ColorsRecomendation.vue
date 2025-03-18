@@ -1,18 +1,24 @@
 <template>
   <div>
     <input
-      class="rounded-full w-full py-2 px-4 m-auto bg-gray-100 focus:outline-none placeholder-gray-400 text-gray-700 mb-5"
+      class="rounded-full w-full py-2 px-4 m-auto bg-gray-100 focus:outline-none placeholder-gray-400 text-gray-700 mb-2"
       v-model="keyword"
       type="search"
-      placeholder="Search a word here, ex: love"
+      placeholder="Enter a niche ex:Food"
       @input="searchData()"
     >
+    <!--<p class="text-xs text-center text-gray-600 mb-5">
+      Enter your Website niche, and we'll recommend the best color palette tailored to your industry.
+    </p>-->
     <div v-if="arrayOfColors.length > 0">
       <Palettes
         v-for="(palettes, key) in arrayOfColors"
         :key="key"
         :colorsHex="palettes"
       />
+    <p class="text-xs text-center text-gray-600 mb-5">
+      Enter your Website niche, and we'll recommend the best color palette tailored to your industry.
+    </p>
     </div>
     <div v-else>
       <div v-if="isFetching" class="text-xs p-1 text-center">
@@ -20,13 +26,8 @@
       </div>
       <div v-else-if="keyword">
         <p class="text-xs text-center p-1">
-          We are sorry, currently no data for <b>{{ keyword }}</b>, but you can add it if you want.
+          We are sorry, currently no data for <b>{{ keyword }}</b>
         </p>
-        <div class="text-center mt-2">
-          <a href="https://github.com/iqbaladinur/color-extractor/tree/master/colors_data" class="text-xs px-2 py-2 bg-indigo-400 text-white rounded-lg">
-            Contribute Palettes
-          </a>
-        </div>
       </div>
     </div>
   </div>
@@ -51,10 +52,9 @@ export default {
     };
   },
   methods: {
-    // eslint-disable-next-line func-names
     searchData: debounce(function () {
       if (this.keyword) {
-        const url = `https://raw.githubusercontent.com/iqbaladinur/color-extractor/master/colors_data/${this.keyword.toLowerCase()}.json`;
+        const url = `/colors_data/${this.keyword.toLowerCase()}.json`;
         this.isFetching = true;
         this.arrayOfColors = [];
         fetch(url)

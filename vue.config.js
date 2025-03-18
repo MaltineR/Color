@@ -1,6 +1,6 @@
 module.exports = {
   pwa: {
-    name: 'Biancoir',
+    name: 'PalettePro',
     themeColor: '#EBF4FF',
     msTileColor: '#4A5568',
     appleMobileWebAppCapable: 'yes',

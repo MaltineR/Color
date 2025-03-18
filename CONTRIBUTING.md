@@ -1,6 +1,6 @@
 # CONTRIBUTE FOR THE CODE
 - Please make Pull Request into **develop** branch.
-- Please add proper label for issue or PR [label description](https://github.com/iqbaladinur/color-extractor/labels).
+- Please add proper label for issue or PR [label description](https://github.com/MaltineR/Color.git/labels).
 - Please describe what you has been changed, for example.
   ```
   #added_palettes
@@ -22,7 +22,7 @@
 
 - Clone this repository. 
   ```bash
-  git clone https://github.com/iqbaladinur/color-extractor.git
+  git clone https://github.com/MaltineR/Color.git
   ```
 - Fetch all. 
   ```bash

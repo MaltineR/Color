@@ -1,31 +1,25 @@
 <template>
-  <div class="mt-10 lg:block lg:p-0 p-8 lg:relative fixed z-10 w-full bottom-0 visible bg-white lg:bg-transparent lg:shadow-none lg:rounded-none shadow-lg rounded-t-lg" :class="mobileViewExpanded ? 'h-auto':'h-0'">
+  <div class="mt-10 lg:block lg:p-0 p-8 lg:relative fixed z-10 w-full bottom-0 visible bg-white lg:bg-transparent lg:shadow-none lg:rounded-none shadow-lg rounded-t-lg" :class="mobileViewExpanded ? 'h-auto' : 'h-0'">
     <button class="h-5 w-5 absolute top-0 right-0 m-2 text-gray-600 focus:outline-none lg:hidden" @click="mobileViewExpanded = !mobileViewExpanded">
-      {{ mobileViewExpanded ? '&#9660;' : '&#9650;' }}
+      {{ mobileViewExpanded ? '\u25BC' : '\u25B2' }}
     </button>
-    <form v-on:submit.prevent @submit="readImage(url)" class="flex lg:px-4 py-2">
-      <input type="search" class="input-style" placeholder="Paste image url here or a word." v-model="url">
-    </form>
+    <!--<form v-on:submit.prevent @submit="readImage(url)" class="flex lg:px-4 py-2">
+      <input type="text" class="input-style" placeholder="Paste image url here or a word." v-model="url" />
+    </form>-->
     <div class="flex lg:px-4 py-2">
-      <input type="number" class="input-style" placeholder="Number of colors show" v-model="quantity">
+      <input type="number" class="input-style" placeholder="Number of colors" v-model="quantity" />
     </div>
     <div class="flex flex-wrap lg:relative w-full lg:p-0">
-      <!-- <div class="w-full lg:px-4 py-2">
-        <input id="mergedOption" type="checkbox" v-model="mergedOption" class="h-3 w-3">
-        <label class="pl-2 text-sm" for="mergedOption" title="Merged some pixel and use the avg value">Merge Pixel</label>
-      </div> -->
       <div class="w-full lg:px-4 py-2">
         <label for="inputPicture" class="rounded-lg block bg-indigo-400 text-white px-4 py-2 cursor-pointer w-full text-center">
-          Select Image
+          Upload Image
         </label>
-        <input class="hidden" id="inputPicture" type="file" ref="imgSrc" @change="readImage()">
+        <input class="hidden" id="inputPicture" type="file" ref="imgSrc" @change="readImage()" />
       </div>
       <div class="w-full lg:px-4 py-2">
-          <button class="rounded-lg bg-gray-900 text-white px-4 py-2 w-full" @click="getDataImage" :disabled="pictureAvaibility" :class="{ 'opacity-50 cursor-not-allowed' : pictureAvaibility }">
-            {{
-              extracting ? 'Extracting...' : 'Extract Color'
-            }}
-          </button>
+        <button class="rounded-lg bg-gray-900 text-white px-4 py-2 w-full" @click="getDataImage" :disabled="pictureAvaibility" :class="{ 'opacity-50 cursor-not-allowed': pictureAvaibility }">
+          {{ extracting ? 'Extracting...' : 'Extract Color' }}
+        </button>
       </div>
     </div>
   </div>
@@ -33,42 +27,29 @@
 
 <script>
 import readPictureAsBase64 from '@/helper/FileReader';
-// import quantifyColor from '@/modules/QuantityImageData';
 import clusterColor from '@/modules/ClusterFvck';
-// eslint-disable-next-line no-useless-escape
-const urlValidation = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
+
+const urlValidation = /http(s)?:\/\/(www\.)?[a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi;
 
 export default {
   name: 'PictureLoader',
   data() {
     return {
-      quantity: 13,
-      mergedOption: true,
+      quantity: null,
       imageObject: new Image(),
       canvas: document.createElement('canvas'),
       extracting: false,
       url: '',
-      imageLoaded: false,
       pictureAvaibility: true,
-      isFetchingImage: false,
       mobileViewExpanded: true,
     };
   },
   mounted() {
-    if (window.screen.width <= 600) {
-      this.quantity = 10;
-    }
     this.imageObject.crossOrigin = 'Anonymous';
     this.canvas.style.imageRendering = 'pixelated';
-    this.readImage('https://source.unsplash.com/800x600?colorful');
-    this.imageObject.addEventListener('load', this.getDataImage);
+    this.pictureAvaibility = true;
   },
   watch: {
-    mergedOption() {
-      if (this.$store.getters.getImgSource) {
-        this.pictureAvaibility = false;
-      }
-    },
     quantity(newVal) {
       if (newVal > 20) {
         this.quantity = 20;
@@ -84,7 +65,7 @@ export default {
         const theUrl = url.match(urlValidation) ? url : `https://source.unsplash.com/800x600?${url}`;
         this.$store.dispatch('toggleIsFetchingImg');
         this.$store.dispatch('setImageSource', null);
-        fetch(`${theUrl}`)
+        fetch(theUrl)
           .then((result) => result.blob())
           .then((image) => {
             readPictureAsBase64(image)
@@ -97,11 +78,11 @@ export default {
               })
               .catch((error) => {
                 this.$store.dispatch('toggleIsFetchingImg');
-                console.log(error);
+                console.error(error);
               });
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
           });
       } else {
         const file = this.$refs.imgSrc;
@@ -113,7 +94,7 @@ export default {
             this.pictureAvaibility = false;
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
           });
       }
     },
@@ -124,7 +105,6 @@ export default {
         this.drawImage();
         const imgData = this.canvas.getContext('2d').getImageData(0, 0, this.canvas.width, this.canvas.height);
         this.$store.dispatch('toggleExtraction');
-        this.mobileViewExpanded = false;
         clusterColor(imgData.data, this.quantity)
           .then((res) => {
             this.extracting = false;
@@ -135,22 +115,9 @@ export default {
           .catch((e) => {
             this.extracting = false;
             this.$store.dispatch('toggleExtraction');
-            console.log(e);
+            console.error(e);
             this.pictureAvaibility = true;
           });
-        // quantifyColor({ imgArray: imgData.data, merge: this.mergedOption, quantity: this.quantity })
-        //   .then((res) => {
-        //     this.extracting = false;
-        //     this.$store.dispatch('toggleExtraction');
-        //     this.$store.dispatch('setTopColors', res.data);
-        //     this.pictureAvaibility = true;
-        //   })
-        //   .catch((error) => {
-        //     this.extracting = false;
-        //     this.$store.dispatch('toggleExtraction');
-        //     console.log(error);
-        //     this.pictureAvaibility = true;
-        //   });
       }
     },
     drawImage() {
@@ -168,8 +135,9 @@ export default {
   },
 };
 </script>
+
 <style lang="postcss" scoped>
-.input-style{
+.input-style {
   @apply rounded-full w-full py-2 px-4 m-auto bg-gray-300 border-2 border-opacity-0 focus:border-2 focus:border-indigo-400 focus:outline-none focus:bg-white placeholder-gray-700 text-gray-700;
 }
 </style>

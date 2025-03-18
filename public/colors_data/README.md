@@ -2,7 +2,7 @@
 
 - Clone this repository. 
   ```bash
-  git clone https://github.com/iqbaladinur/color-extractor.git
+  git clone https://github.com/MaltineR/Color.git
   ```
 - Fetch all. 
   ```bash
