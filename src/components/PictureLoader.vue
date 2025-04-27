@@ -3,48 +3,50 @@
     <button class="h-5 w-5 absolute top-0 right-0 m-2 text-gray-600 focus:outline-none lg:hidden" @click="mobileViewExpanded = !mobileViewExpanded">
       {{ mobileViewExpanded ? '\u25BC' : '\u25B2' }}
     </button>
-    <!--<form v-on:submit.prevent @submit="readImage(url)" class="flex lg:px-4 py-2">
-      <input type="text" class="input-style" placeholder="Paste image url here or a word." v-model="url" />
-    </form>-->
     <div class="flex lg:px-4 py-2">
-      <input type="number" class="input-style" placeholder="Number of colors" v-model="quantity" />
+      <input type="number" class="input-style" placeholder="Numri i ngjyrave" v-model="quantity" />
     </div>
     <div class="flex flex-wrap lg:relative w-full lg:p-0">
       <div class="w-full lg:px-4 py-2">
         <label for="inputPicture" class="rounded-lg block bg-indigo-400 text-white px-4 py-2 cursor-pointer w-full text-center">
-          Upload Image
+          Ngarko Imazh
         </label>
         <input class="hidden" id="inputPicture" type="file" ref="imgSrc" @change="readImage()" />
       </div>
       <div class="w-full lg:px-4 py-2">
         <button class="rounded-lg bg-gray-900 text-white px-4 py-2 w-full" @click="getDataImage" :disabled="pictureAvaibility" :class="{ 'opacity-50 cursor-not-allowed': pictureAvaibility }">
-          {{ extracting ? 'Extracting...' : 'Extract Color' }}
+          {{ extracting ? 'Duke ekstraktuar' : 'Ekstrakto Ngjyrën' }}
         </button>
       </div>
       <div class="w-full lg:px-4 py-2">
         <button class="rounded-lg bg-gray-500 text-white px-6 py-1 w-auto mt-2 text-sm" @click="showHelp = true">
-      Help
-    </button>
+          Ndihmë
+        </button>
       </div>
     </div>
     <!-- Help Modal -->
     <div v-if="showHelp" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
       <div class="bg-white p-8 rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
-        <h2 class="text-2xl font-bold mb-4">How to Use This Website</h2>
+        <h2 class="text-2xl font-bold mb-4">Si të Përdorni këtë Aplikacion</h2>
         <p class="mb-4">
-          Here are some instructions on how to use this website:
+          Këtu janë disa udhëzime për mënyrën e përdorimit:
           <ul class="list-disc pl-5">
-            <li>Upload an image using the "Upload Image" button.</li>
-            <li>Enter the number of colors you want to extract (max 20).</li>
-            <li>Click "Extract Color" to get the dominant colors from the image.</li>
+            <li>Ngarkoni një imazh duke përdorur butonin "Ngarko Imazh".</li>
+            <li>Shkruani numrin e ngjyrave që dëshironi të nxirrni (maksimumi 20).</li>
+            <li>Klikoni "Ekstrakto Ngjyrën" për të marrë ngjyrat dominuese nga imazhi.</li>
+            <li>Në anën e djathtë të faqes, mund të përdorni shiritin e kërkimit për të gjetur paleta ngjyrash bazuar në kategorin tuaj (p.sh.,Ushqim).</li>
+            <li>Klikoni mbi një ngjyrë në paletë për të kopjuar kodin e saj Hex.</li>
           </ul>
         </p>
+        <!-- Corrected Video Embedding -->
         <div class="video-container mb-4">
-          <!-- Embed your video here -->
-          <iframe width="100%" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <video width="100%" height="315" controls autoplay muted>
+            <source :src="require('@/assets/PalettePro1.mp4')" type="video/mp4">
+            Browseri yt nuk e mbështet elementin video.
+          </video>
         </div>
         <button class="rounded-lg bg-red-500 text-white px-4 py-2 w-full" @click="showHelp = false">
-          Close
+          Mbyll
         </button>
       </div>
     </div>
@@ -175,7 +177,7 @@ export default {
   overflow: hidden;
 }
 
-.video-container iframe {
+.video-container video {
   position: absolute;
   top: 0;
   left: 0;

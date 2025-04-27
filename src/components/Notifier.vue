@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      visible: true, // ✅ Ensure it's true so it appears when the page loads
+      visible: true,
     };
   },
   methods: {

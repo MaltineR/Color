@@ -6,16 +6,15 @@
         fontFamily: 'system-ui'
       }"
     >
-    Find the Perfect Colors for Your Brand or Project!
+    Gjej Ngjyrat E Përsosura Për Projektin Tënd!
     </p>
-
     <p
       class="text-left font-thin text-gray-600 py-4 text-center text-l"
       :style="{
         fontFamily: 'system-ui'
       }"
     >
-      Image Preview
+    Parapamje e Imazhit
     </p>
 
     <div class="flex flex-wrap">

@@ -4,12 +4,9 @@
       class="rounded-full w-full py-2 px-4 m-auto bg-gray-100 focus:outline-none placeholder-gray-400 text-gray-700 mb-2"
       v-model="keyword"
       type="search"
-      placeholder="Enter a niche ex:Food"
+      placeholder="Shkruaj një kategori"
       @input="searchData()"
     >
-    <!--<p class="text-xs text-center text-gray-600 mb-5">
-      Enter your Website niche, and we'll recommend the best color palette tailored to your industry.
-    </p>-->
     <div v-if="arrayOfColors.length > 0">
       <Palettes
         v-for="(palettes, key) in arrayOfColors"
@@ -17,16 +14,16 @@
         :colorsHex="palettes"
       />
     <p class="text-xs text-center text-gray-600 mb-5">
-      Enter your Website niche, and we'll recommend the best color palette tailored to your industry.
+      Shkruaj një kategori p.sh: Ushqim dhe ne do të rekomandojmë paletën më të mirë të ngjyrave të përshtatur për industrinë tënde.
     </p>
     </div>
     <div v-else>
       <div v-if="isFetching" class="text-xs p-1 text-center">
-        Looking palettes for <b>{{ keyword }}</b> ...
+        Duke kërkuar paleta për <b>{{ keyword }}</b> ...
       </div>
       <div v-else-if="keyword">
         <p class="text-xs text-center p-1">
-          We are sorry, currently no data for <b>{{ keyword }}</b>
+          Na vjen keq, aktualisht nuk ka të dhëna për <b>{{ keyword }}</b>
         </p>
       </div>
     </div>

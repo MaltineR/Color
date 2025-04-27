@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-xs text-center text-gray-600 mb-5">
-      Click on the color to copy Hexcode
+      Kliko mbi ngjyrën për të kopjuar Kodin Hex
     </p>
     <div v-if="getTopColors.length < 1" class="palette-container">
 

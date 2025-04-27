@@ -6,7 +6,7 @@
       :style="`background-color: ${bg.slice(0, 7)}`"
     >
       <p class="m-auto font-bold" :class="text" style="font-size: 0.5rem">
-        Copied
+        Kopjuar
       </p>
     </div>
   </div>
