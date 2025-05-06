@@ -37,7 +37,7 @@ export default {
       }
     },
     hide() {
-      this.visible = false; // ✅ Hides when the "X" button is clicked
+      this.visible = false;
     },
   },
 };

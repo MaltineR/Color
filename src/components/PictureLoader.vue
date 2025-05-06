@@ -26,18 +26,21 @@
     </div>
     <!-- Help Modal -->
     <div v-if="showHelp" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
-      <div class="bg-white p-8 rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
-        <h2 class="text-2xl font-bold mb-4">Si të Përdorni këtë Aplikacion</h2>
-        <p class="mb-4">
-          Këtu janë disa udhëzime për mënyrën e përdorimit:
-          <ul class="list-disc pl-5">
-            <li>Ngarkoni një imazh duke përdorur butonin "Ngarko Imazh".</li>
-            <li>Shkruani numrin e ngjyrave që dëshironi të nxirrni (maksimumi 20).</li>
-            <li>Klikoni "Ekstrakto Ngjyrën" për të marrë ngjyrat dominuese nga imazhi.</li>
-            <li>Në anën e djathtë të faqes, mund të përdorni shiritin e kërkimit për të gjetur paleta ngjyrash bazuar në kategorin tuaj (p.sh.,Ushqim).</li>
-            <li>Klikoni mbi një ngjyrë në paletë për të kopjuar kodin e saj Hex.</li>
-          </ul>
-        </p>
+      <div class="bg-white p-5 rounded-lg w-11/12 md:w-1/2 lg:w-1/3 max-h-[500px] overflow-auto">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-800">
+  Si të Përdorni këtë Aplikacion
+</h2>
+
+<p class="mb-4 text-gray-800 dark:text-gray-800">
+  Këtu janë disa udhëzime për mënyrën e përdorimit:
+  <ul class="list-disc pl-5">
+    <li>Ngarkoni një imazh duke përdorur butonin "Ngarko Imazh".</li>
+    <li>Shkruani numrin e ngjyrave që dëshironi të nxirrni (maksimumi 20).</li>
+    <li>Klikoni "Ekstrakto Ngjyrën" për të marrë ngjyrat dominuese nga imazhi.</li>
+    <li>Në anën e djathtë të faqes, mund të përdorni shiritin e kërkimit për të gjetur paleta ngjyrash bazuar në kategorin tuaj (p.sh., Ushqim).</li>
+    <li>Klikoni mbi një ngjyrë në paletë për të kopjuar kodin e saj Hex.</li>
+  </ul>
+</p>
         <!-- Corrected Video Embedding -->
         <div class="video-container mb-4">
           <video width="100%" height="315" controls autoplay muted>
