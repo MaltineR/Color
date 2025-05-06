@@ -1,6 +1,5 @@
 <div align="center">
   <br>
-  !--<img src="https://raw.githubusercontent.com/iqbaladinur/color-extractor/master/public/paint.png" width="100px" height="100px">---!
   <h2>
     PalettePro
   </h2>
